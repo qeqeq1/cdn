@@ -5,7 +5,7 @@ exit 1
 fi
 content=$*
 if [[ "$content" ]];then
-    share_link="https://paste.ubuntu.com"$(curl -v --data-urlencode "content=${content}" -d "poster=napoi.cn" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | grep "Location" | awk '{print $3}')
+    share_link="https://paste.ubuntu.com"$(curl -v --data-urlencode "content=${content}" -d "poster=Handle" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | grep "Location" | awk '{print $3}')
     echo $share_link
 else
     echo "没有传入要上传的文本"
