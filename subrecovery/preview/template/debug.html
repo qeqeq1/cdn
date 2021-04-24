@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <base href="..">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="drama/xfDebugger/debugger.css">
+    <link rel="icon" type="image/png" href="assets/icons/icon-32.png">
+</head>
+<body>
+<div id="xf-root"></div>
+<div id="side" class="noselect">
+    <div id="topbar" class="noselect f-clearfix">
+        <div class="topbar-left">
+            <div id="gripper">
+                <span id="topbarhandle" title="Drag to resize this pane">信息</span>
+            </div>
+            <div id="perfstats">
+                <ul class="infostats">
+                    <li>项目名称：<span id="perProName"></span></li>
+                    <li>运行状态：<span id="perRunStatus"></span></li>
+                    <li>cpu 占用：<span id="perCpu"></span></li>
+                    <li>对像数：<span id="perObjectNum"></span></li>
+                    <li>图片内存占用：<span id="perImgMem"></span></li>
+                    <li>帧率：<span id="perFrameRate"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div id="controls">
+            <h3 class="controlTitle">操作</h3>
+            <div class="controlsBtns">
+                <a id="save" class="barbutton" title="Save the current state">保存</a>
+                <a id="load" class="barbutton" title="Load the previously saved state">读取</a>
+                <a id="step" class="barbutton">Step</a>
+                <a id="restart" class="barbutton">重新运行</a>
+                <a id="pauseresume" class="barbutton">Pause</a>
+            </div>
+            <a id="popoutdebugger" title="Click to toggle debugger in own window"></a>
+        </div>
+        <span id="tabs">
+			<a id="inspect-tab" class="tab">Inspect</a>
+			<a id="watch-tab" class="tab inactive">Watch</a>
+			<a id="profile-tab" class="tab inactive">Profile</a>
+		</span>
+    </div>
+    <div class="f-clearfix">
+        <div id="leftpane" class="noselect">
+            <h3 class="leftH3">对象</h3>
+            <ul id="objectlist" class="noselect">
+            </ul>
+        </div>
+        <div id="rightpane" class="noselect">
+            <p id="status">Loading...</p>
+            <div id="inspectview" class="noselect propertycontainer"></div>
+            <div id="inspectview2">
+                <h3 class="leftH3">全局变量</h3>
+                <div id="variableview"></div>
+            </div>
+        </div>
+    </div>
+    <div id="perfpane" class="noselect">
+        <p id="perfnote">Note this section only measures CPU time. All values are estimates, and 'Draw calls' will be an underestimate where the browser uses multithreaded rendering. GPU rendering times are not shown, and the framerate may be limited by GPU performance.</p>
+        <div id="perftablewrap"></div>
+    </div>
+    <div id="watchpane" class="noselect">
+        <div id="watchview" class="noselect propertycontainer"></div>
+    </div>
+</div>
+<div id="main">
+    <div id="iframewrap">
+        <iframe allowfullscreen="true" id="theiframe" scrolling="no" noresize="noresize"></iframe>
+    </div>
+</div>
+<script src="template/debugger.js"></script>
+</body>
+</html>
