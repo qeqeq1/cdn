@@ -1,0 +1,46 @@
+{
+    "editorVersion": "",
+    "figletVersion": "",
+    "outline": false,
+    "exportType": "preview",
+    "channel": "xingyun",
+    "appId": "",
+    "appKey": "",
+    "version": "",
+    "devid": "",
+    "share": {
+        "title": "",
+        "pic": "",
+        "summary": ""
+    },
+    "hykbId": "",
+    "umengKey": "",
+    "umengChannel": "",
+    "ad": {
+        "channelName": {
+            "rewardVideo": {
+                "appId": "",
+                "spaceId": ""
+            },
+            "banner": {
+                "appId": "",
+                "spaceId": ""
+            },
+            "intertistial": {
+                "appId": "",
+                "spaceId": ""
+            }
+        }
+    },
+    "enableLogger": false,
+    "isEvkBanner": true,
+    "oppoSdk": "https://cdofs.oppomobile.com/cdo-activity/static/201809/30/gamehall/sdk/oppo-sdk-1.7.0.js",
+    "gameSocket": "ws://game-proxy.api.dev.gramaker.com/ws",
+    "sentry": {
+        "dsn": "https://8a11babfad0d4171b4eaf1124c14caf9@sentry.ixingfei.cn/11"
+    },
+    "gameNotFound": "http://dev.gramaker.com/game/notfound",
+    "supportBarrage": true,
+    "ossHost": "https://oss.gramaker.com",
+    "ossTestHost": "https://test-oss.evk6.cn"
+}

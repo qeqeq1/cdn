@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>$NAME$</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="assets/preview.css">
+    <link rel="icon" type="image/png" href="assets/icons/icon-32.png">
+</head>
+<body style="background-color: #FAFAFC">
+<div id="xf-root"></div>
+<div id="init_loading_div"></div>
+<script>
+    const isPortrait = window.innerWidth < window.innerHeight;
+    let logoCls = 'evlogo';
+    let logoUrl = 'assets/splash-images/splash_logo';
+    if (isPortrait) {
+        logoCls += '_v';
+        logoUrl += '_v';
+    } else {
+        logoCls += '_h';
+        logoUrl += '_h';
+    }
+
+    const container = document.getElementById('init_loading_div');
+    const logo = document.createElement('img');
+    logo.className = logoCls;
+    logo.src = logoUrl + '.png';
+    logo.onload = ()=> {
+        container.append(logo);
+    };
+    // 数组方式加载js
+    var loadScript = function (list, callback, id) {
+        var loaded = 0;
+        var loadNext = function () {
+            loadSingleScript(list[loaded], function () {
+                loaded++;
+                if (loaded >= list.length) {
+                    callback();
+                }
+                else {
+                    loadNext();
+                }
+            }, id)
+        };
+        loadNext();
+    };
+
+    /**
+     * @desc 加载单个js
+     * @param src
+     * @param callback
+     */
+    var loadSingleScript = function (src, callback) {
+        if (src.indexOf('http://') > -1 || src.indexOf('http://') > -1) {
+            // TODO
+        } else if (src.indexOf('support') > -1) {
+            src = '../' + src;
+        } else if (src.indexOf('preview') > -1) {
+            src = src.replace('preview/', '');
+        } else if (src.indexOf('plugins') > -1) {
+            src = '../' + src;
+        }
+
+        var script = document.createElement('script');
+        script.async = false;
+        script.src = src;
+        script.addEventListener('load', function () {
+            callback();
+        }, false);
+        document.body.appendChild(script);
+    };
+
+    var configJSON = null;
+    var entitiesJSON = {
+        behaviorList: [],
+        pluginList: []
+    };
+
+    function doAjax(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url + '?v=' + Math.random(), false);
+        xhr.addEventListener("load", function () {
+            callback(JSON.parse(xhr.response))
+        });
+        xhr.send(null);
+    }
+
+    // 获取config.json
+    doAjax('./config.json', function (res) {
+        configJSON = res;
+    });
+
+    // 获取组件与能力
+    doAjax('./package.json', function (res) {
+        if (res && res.usedAddons) {
+            res.usedAddons.forEach(item => {
+                if (item.type === 'behavior') {
+                    entitiesJSON.behaviorList.push(item.dir)
+                } else if (item.type === 'plugin') {
+                    entitiesJSON.pluginList.push(item.dir);
+                }
+            });
+        }
+    });
+</script>
+<script>
+    let url = location.href;
+    if (url.indexOf('device=mobile') > -1) {
+        loadScript(configJSON.eruda, function () {
+            eruda.init();
+        })
+    }
+</script>
+<script src="template/config.js"></script>
+<script>
+    const debug = false;
+
+    // sentry 上报
+    var list = configJSON.sentry;
+    // player与debug通信
+    list = list.concat(configJSON.debugMainList);
+    // libs资源库
+    list = list.concat(configJSON.libs);
+    // xfPlayerToolList
+    list = list.concat(configJSON.xfPlayerToolList);
+    // commonList
+    list = list.concat(configJSON.commonList);
+    // cloudLadderSDK
+    list = list.concat(configJSON.cloudLadderSDK);
+    // sentryContext
+    list = list.concat(configJSON.sentryContext);
+    // 组件
+    list = list.concat(entitiesJSON.pluginList);
+    // 抽象组件
+    list = list.concat(entitiesJSON.behaviorList);
+    // 编辑器导出的refTable与effect
+    list = list.concat(configJSON.editorExport);
+    // player渲染的脚本
+    list = list.concat(configJSON.xfPlayerList);
+
+    if (debug) {
+        list.push('extends.js')
+    }
+
+    loadScript(list, function () { });
+</script>
+</body>
+</html>
