@@ -1,0 +1,35 @@
+{
+    "baseURL": "https://beta-api.gramaker.com",
+    "serverURL": "https://beta-game-proxy.api.gramaker.com",
+    "xsSdk": "https://resource.hoho666.com/js/seiya/seiya-sdk-v4.0.js",
+    "xsSdkPC": "https://resource.hoho666.com/js/seiya/pc/seiya-sdk-v4.0.js",
+    "cloudLadder": {
+        "host": "https://applog.test.dc.hoho666.com",
+        "appId": "draplayer",
+        "appSecret": "iss8saDASsajx0msxn",
+        "subChannelId": "600001",
+        "extChannelId": "600002"
+    },
+    "enableLogger": true,
+    "ad": {
+        "xingfei": {
+            "rewardVideo": {
+                "appId": 23,
+                "spaceId": 26
+            },
+            "banner": {
+                "appId": 23,
+                "spaceId": 27
+            },
+            "intertistial": {
+                "appId": "",
+                "spaceId": ""
+            }
+        }
+    },
+    "evkAppCpackUrl": "http://app-dev.evk.ixingfei.com:7000",
+    "evkHomeUrl": "http://beta.gramaker.com",
+    "gameSocket": "wss://beta-game-proxy.api.gramaker.com/ws",
+    "environment": "beta",
+    "gameNotFound": "http://beta.gramaker.com/game/notfound"
+}
